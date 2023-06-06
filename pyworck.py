@@ -1,16 +1,22 @@
 #nucleeo
 import math
-angulo=float(input("ingrese el valor de uno de los angulos"))
-masa=int(input("ingrese el valor de la masa del objeto"))
-coero=int(input("ingrese el coeficiente de roce"))
-Gravedad=9.8
-peso=float(masa * Gravedad)
-print(peso)
-radianes=(angulo*math.pi)/180
-seno=math.sin(radianes)
-print(seno+0.00000000000000006)
-coseno=math.cos(angulo)
-newtons=float(seno*peso)
-print(newtons+0.00000000000001)
-aceleracion=float(newtons/masa)
-print(aceleracion+0.0000000000000005)
+ang=float(input("ingrese el valor de uno de los angulos"))
+masa=float(input("ingrese el valor de la masa del objeto"))
+mu=float(input("ingrese el coeficiente de roce"))
+g=9.8
+peso=(masa * g)
+print(f"peso:{peso}")
+radianes=(ang*math.pi)/180
+sen=math.sin(radianes)
+cos=math.cos(radianes)
+pesox=(sen*peso)
+pesoy=(cos*peso)
+N = pesoy
+roce=(N*mu)
+Fneta = (pesox-roce)
+print(f"sen es {sen}")
+print(f"cos es {cos}")
+print(f"pesox es {pesox}")
+print(f"pesoy es {pesoy}")
+aceleracion=round((Fneta/masa),2)
+print(aceleracion)
