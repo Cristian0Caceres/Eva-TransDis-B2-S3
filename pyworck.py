@@ -1,8 +1,8 @@
 #nucleeo
 import math
-ang=float(input("ingrese el valor de uno de los angulos"))
-masa=float(input("ingrese el valor de la masa del objeto"))
-mu=float(input("ingrese el coeficiente de roce"))
+ang=float(input("ingrese el valor de uno de los angulos: "))
+masa=float(input("ingrese el valor de la masa del objeto: "))
+mu=float(input("ingrese el coeficiente de roce: "))
 g=9.8
 peso=(masa * g)
 print(f"peso:{peso}")
