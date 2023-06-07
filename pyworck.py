@@ -18,21 +18,21 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
 
     if coeficiente_roce == 0:
         # Si no hay roce, la aceleración es la componente x del peso dividida por la masa
-        aceleracion = pesox / masa
-        fuerza_neta = pesox
+        aceleracion = round(pesox / masa, 2)
+        fuerza_neta = round(pesox, 2)
     else:
         if coeficiente_roce < 0 or coeficiente_roce > 1:
             raise ValueError("El coeficiente de roce debe estar entre 0 y 1")
         # Calcular la normal (componente y del peso)
         N = pesoy
         # Calcular la fuerza de roce
-        roce = N * coeficiente_roce
+        roce = round(N * coeficiente_roce, 2)
         # Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
-        fuerza_neta = pesox - roce
+        fuerza_neta = round(pesox - roce, 2)
         # Calcular la aceleración con roce
-        aceleracion = fuerza_neta / masa
+        aceleracion = round(fuerza_neta / masa, 2)
 
-    return aceleracion, masa, angulo, roce, fuerza_neta, pesox, pesoy
+    return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)
 
 def calcular_button_click():
     try:
@@ -47,8 +47,8 @@ def calcular_button_click():
                            f"Ángulo: {angulo_objeto}\n"
                            f"Fuerza de Roce: {roce}\n"
                            f"Fuerza Neta: {fuerza_neta}\n"
-                           f"Componente X del Peso: {pesox}\n"
-                           f"Componente Y del Peso: {pesoy}")
+                           f"Peso en X: {pesox}\n"
+                           f"Peso en Y: {pesoy}")
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
