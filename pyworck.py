@@ -38,5 +38,10 @@ def calculo_aceleracion_con_roce():
     print(aceleracion+0.0000000000000005)
     return
 
-calculo_aceleracion_con_roce()
-calculo_aceleracion_sin_roce()
+print("¿desea hacer el calculo con o sin roce?")
+print("ingrese '1' se lo desea con roce o '2' si lo desea sin este")
+opcion = int(input())
+if opcion == 1:
+    calculo_aceleracion_con_roce()
+elif opcion == 2:
+    calculo_aceleracion_sin_roce()
