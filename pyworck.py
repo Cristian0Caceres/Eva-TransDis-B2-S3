@@ -1,4 +1,6 @@
 import math
+import tkinter as tk
+from tkinter import messagebox
 
 def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     # Gravedad
@@ -17,25 +19,69 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     if coeficiente_roce == 0:
         # Si no hay roce, la aceleración es la componente x del peso dividida por la masa
         aceleracion = pesox / masa
+        fuerza_neta = pesox
     else:
+        if coeficiente_roce < 0 or coeficiente_roce > 1:
+            raise ValueError("El coeficiente de roce debe estar entre 0 y 1")
         # Calcular la normal (componente y del peso)
         N = pesoy
         # Calcular la fuerza de roce
         roce = N * coeficiente_roce
         # Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
-        Fneta = pesox - roce
+        fuerza_neta = pesox - roce
         # Calcular la aceleración con roce
-        aceleracion = Fneta / masa
+        aceleracion = fuerza_neta / masa
 
-    return aceleracion, masa, angulo
+    return aceleracion, masa, angulo, roce, fuerza_neta, pesox, pesoy
 
-# Solicitar los datos al usuario
-angulo = float(input("Ingrese el valor de uno de los ángulos: "))
-masa = int(input("Ingrese el valor de la masa del objeto: "))
-coeficiente_roce = float(input("Ingrese el coeficiente de roce (si no hay roce, ingrese 0): "))
+def calcular_button_click():
+    try:
+        angulo = float(angulo_entry.get())
+        masa = float(masa_entry.get())
+        coeficiente_roce = float(coeficiente_roce_entry.get())
 
-# Calcular la aceleración utilizando la función calcular_aceleracion()
-aceleracion = calcular_aceleracion(angulo, masa, coeficiente_roce)
+        aceleracion, masa_objeto, angulo_objeto, roce, fuerza_neta, pesox, pesoy = calcular_aceleracion(angulo, masa, coeficiente_roce)
 
-# Imprimir el resultado
-print(aceleracion)
+        resultado_text.set(f"Aceleración: {aceleracion}\n"
+                           f"Masa: {masa_objeto}\n"
+                           f"Ángulo: {angulo_objeto}\n"
+                           f"Fuerza de Roce: {roce}\n"
+                           f"Fuerza Neta: {fuerza_neta}\n"
+                           f"Componente X del Peso: {pesox}\n"
+                           f"Componente Y del Peso: {pesoy}")
+    except ValueError as e:
+        messagebox.showerror("Error", str(e))
+
+# Crear la ventana principal
+window = tk.Tk()
+window.title("Cálculo de Aceleración")
+
+# Etiqueta y campo de entrada para el ángulo
+angulo_label = tk.Label(window, text="Ángulo:")
+angulo_label.pack()
+angulo_entry = tk.Entry(window)
+angulo_entry.pack()
+
+# Etiqueta y campo de entrada para la masa
+masa_label = tk.Label(window, text="Masa:")
+masa_label.pack()
+masa_entry = tk.Entry(window)
+masa_entry.pack()
+
+# Etiqueta y campo de entrada para el coeficiente de roce
+coeficiente_roce_label = tk.Label(window, text="Coeficiente de Roce:")
+coeficiente_roce_label.pack()
+coeficiente_roce_entry = tk.Entry(window)
+coeficiente_roce_entry.pack()
+
+# Botón de cálculo
+calcular_button = tk.Button(window, text="Calcular", command=calcular_button_click)
+calcular_button.pack()
+
+# Variable de texto para mostrar el resultado
+resultado_text = tk.StringVar()
+resultado_label = tk.Label(window, textvariable=resultado_text)
+resultado_label.pack()
+
+# Iniciar el bucle principal de la interfaz gráfica
+window.mainloop()
