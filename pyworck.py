@@ -19,7 +19,7 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
 
     if coeficiente_roce < 0 or coeficiente_roce > 1:
         raise ValueError("El coeficiente de roce debe estar entre 0 y 1")
-    if angulo < 1 or angulo > 89:
+    if angulo < 1 or angulo > 90:
         raise ValueError("El angulo debe estar entre 1 y 89 grados")
     # Calcular la normal (componente y del peso)
     N = pesoy
