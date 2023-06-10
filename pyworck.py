@@ -1,7 +1,8 @@
 import math
+import pygame as py
 import tkinter as tk
+import sys
 from tkinter import messagebox
-
 def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     # Gravedad
     g = 9.8
@@ -83,3 +84,19 @@ resultado_label.pack()
 
 # Iniciar el bucle principal de la interfaz gráfica
 window.mainloop()
+
+py.init()
+
+width=640
+height=480
+screen=py.display.set_mode((width,height))
+
+py.display.set_caption("My Mame")
+
+while True:
+    for event in py.event.get():
+        if event.type==py.quit:
+            py.quit()
+            sys.exit()
+
+    py.display.update()
