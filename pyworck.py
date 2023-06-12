@@ -25,6 +25,31 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
 
     return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)
 
+def dibujar_triangulo(angulo):
+    canvas.delete("triangulo")  # Borra cualquier triángulo dibujado previamente
+
+    # Convertir el ángulo a radianes
+    radianes = math.radians(angulo)
+
+    # Coordenadas del vértice del ángulo agudo
+    x1 = 50
+    y1 = 200
+
+    # Longitud del cateto adyacente y cateto opuesto
+    cateto_adyacente = 150
+    cateto_opuesto = cateto_adyacente * math.tan(radianes)
+
+    # Coordenadas del segundo vértice (en el cateto adyacente)
+    x2 = x1 + cateto_adyacente
+    y2 = y1
+
+    # Coordenadas del tercer vértice (en el cateto opuesto)
+    x3 = x1
+    y3 = y1 - cateto_opuesto
+
+    # Dibujar el triángulo en el lienzo
+    canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
+
 def calcular_button_click():
     try:
         angulo = float(angulo_entry.get())
@@ -40,6 +65,9 @@ def calcular_button_click():
                            f"Fuerza Neta: {fuerza_neta}\n"
                            f"Peso en X: {pesox}\n"
                            f"Peso en Y: {pesoy}")
+        
+        dibujar_triangulo(angulo)
+
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
@@ -74,5 +102,8 @@ resultado_text = tk.StringVar()
 resultado_label = tk.Label(window, textvariable=resultado_text)
 resultado_label.pack()
 
+canvas = tk.Canvas(window, width=300, height=250)
+canvas.pack()
+
 # Iniciar el bucle principal de la interfaz gráfica
-window.mainloop()
+window.mainloop() 
