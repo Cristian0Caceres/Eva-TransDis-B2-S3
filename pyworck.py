@@ -20,6 +20,7 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     roce = round(N * coeficiente_roce, 2)
     # Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
     fuerza_neta = round(pesox - roce, 2)
+    fuerza_neta = max(fuerza_neta, 0)
     # Calcular la aceleración con roce
     aceleracion = round(fuerza_neta / masa, 2)
 
