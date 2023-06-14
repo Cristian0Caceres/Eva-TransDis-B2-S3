@@ -27,18 +27,12 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     roce = round(N * coeficiente_roce, 2)
     # Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
     fuerza_neta = round(pesox - roce, 2)
-<<<<<<< Updated upstream
-    # Calcular la aceleración con roce
-=======
     fuerza_neta = max(fuerza_neta, 0)
     # Calcular la aceleracion con roce
->>>>>>> Stashed changes
     aceleracion = round(fuerza_neta / masa, 2)
 
     return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)
 
-<<<<<<< Updated upstream
-=======
 #Se crea una funcion en la cual se centrara en la visualizacion del triangulo rectangulo del plano inclinado.
 def dibujar_triangulo(angulo):
     canvas.delete("triangulo")  #Borra cualquier triángulo dibujado previamente
@@ -66,7 +60,6 @@ def dibujar_triangulo(angulo):
     canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
 
 #Se crea una funcion que se centrara en la ventana de Tkinter en donde el usuario podra ingresar los datos.
->>>>>>> Stashed changes
 def calcular_button_click():
     try:
         angulo = float(angulo_entry.get())
@@ -74,20 +67,17 @@ def calcular_button_click():
         coeficiente_roce = float(coeficiente_roce_entry.get())
 
         aceleracion, masa_objeto, angulo_objeto, roce, fuerza_neta, pesox, pesoy = calcular_aceleracion(angulo, masa, coeficiente_roce)
-
-        resultado_text.set(f"Aceleración: {aceleracion}\n"
-                           f"Masa: {masa_objeto}\n"
+        
+        resultado_text.set(f"Aceleración: {aceleracion}\n"#resultado acerelarion
+                           f"Masa: {masa_objeto}\n"#
                            f"Ángulo: {angulo_objeto}\n"
                            f"Fuerza de Roce: {roce}\n"
                            f"Fuerza Neta: {fuerza_neta}\n"
                            f"Peso en X: {pesox}\n"
                            f"Peso en Y: {pesoy}")
-<<<<<<< Updated upstream
-=======
         
         dibujar_triangulo(angulo)
 
->>>>>>> Stashed changes
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
@@ -95,11 +85,7 @@ def calcular_button_click():
 window = tk.Tk()
 window.title("Cálculo de Aceleración")
 
-<<<<<<< Updated upstream
-# Etiqueta y campo de entrada para el ángulo
-=======
 #Etiqueta y campo de entrada para el angulo
->>>>>>> Stashed changes
 angulo_label = tk.Label(window, text="Ángulo:")
 angulo_label.pack()
 angulo_entry = tk.Entry(window)
@@ -117,11 +103,7 @@ coeficiente_roce_label.pack()
 coeficiente_roce_entry = tk.Entry(window)
 coeficiente_roce_entry.pack()
 
-<<<<<<< Updated upstream
-# Botón de cálculo
-=======
 #Botón de calculo
->>>>>>> Stashed changes
 calcular_button = tk.Button(window, text="Calcular", command=calcular_button_click)
 calcular_button.pack()
 
