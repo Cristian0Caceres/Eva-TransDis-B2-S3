@@ -67,10 +67,10 @@ def calcular_button_click():
         resultado_text.set(f"Aceleración: {aceleracion}\n"
                            f"Masa: {masa_objeto}\n"
                            f"Ángulo: {angulo_objeto}\n"
-                           f"Fuerza de Roce = (N*μ) = {roce}\n"
+                           f"Fuerza de Roce = (N x μ) = {roce}\n"
                            f"Fuerza Neta: P + N + Fr = {fuerza_neta}\n"
-                           f"Peso en X = P * sen(α) = {pesox}\n"
-                           f"Peso en Y = P * cos(α) = {pesoy}")
+                           f"Peso en X = P x sen(α) = {pesox}\n"
+                           f"Peso en Y = P x cos(α) = {pesoy}")
         
         dibujar_triangulo(angulo)
 
