@@ -3,7 +3,7 @@ import math
 import tkinter as tk
 from tkinter import messagebox
 
-#Se crea una funcion en la cual se ejecuten las formulas necesarias en el plano inclinado.
+#Se crea una funcion en la cual se ejecuten las formulas necesarias en el plano inclinado, la cual trabaja con el ingreso del angulo, masa y coeficiente de roce.
 def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     g = 9.8
     peso = masa * g
@@ -13,27 +13,29 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     pesox = seno * peso
     pesoy = coseno * peso
 
-#Se especifican los limites y si se salen de esto, genere un error.
+#Se especifican los limites del coeficiente de roce y el angulo, si se salen de esto, genere un error.
     if coeficiente_roce < 0 or coeficiente_roce > 1:
         raise ValueError("El coeficiente de roce debe estar entre 0 y 1")
     if angulo < 1 or angulo > 90:
         raise ValueError("El angulo debe estar entre 1 y 89 grados")
     
+    #Se iguala el peso en Y con la fuerza normal.
     N = pesoy
     roce = round(N * coeficiente_roce, 2)
     # Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
     fuerza_neta = round(pesox - roce, 2)
     fuerza_neta = max(fuerza_neta, 0)
-    # Calcular la aceleración con roce
+    #Calcular la aceleración con roce.
     aceleracion = round(fuerza_neta / masa, 2)
 
+#Se devueleven todos los datos por funcionalidad.
     return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)
 
 #Se crea una funcion en la cual se centrara en la visualizacion del triangulo rectangulo del plano inclinado.
 def dibujar_triangulo(angulo):
-    canvas.delete("triangulo")  # Borra cualquier triángulo dibujado previamente
+    canvas.delete("triangulo")  #se borra cualquier triángulo dibujado previamente al ingresar nuevos datos.
 
-    #Convertir el ángulo a radianes
+    #Convertir el ángulo a radianes por funcionalidad.
     radianes = math.radians(angulo)
 
     #Coordenadas del vértice del ángulo agudo
@@ -52,7 +54,7 @@ def dibujar_triangulo(angulo):
     x3 = x1
     y3 = y1 - cateto_opuesto
 
-    #Dibujar el triángulo en el lienzo
+    #Se dibuja el triángulo en el lienzo
     canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
 
 #Se crea una funcion que se centrara en la ventana de Tkinter en donde el usuario podra ingresar los datos.
@@ -64,6 +66,7 @@ def calcular_button_click():
 
         aceleracion, masa_objeto, angulo_objeto, roce, fuerza_neta, pesox, pesoy = calcular_aceleracion(angulo, masa, coeficiente_roce)
 
+#Se escriben los reslutados con sus respectivas formulas del como se llegaron a estos.
         resultado_text.set(f"Aceleración: {aceleracion}\n"
                            f"Masa: {masa_objeto}\n"
                            f"Ángulo: {angulo_objeto}\n"
@@ -77,23 +80,23 @@ def calcular_button_click():
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
-#Crear la ventana principal
+#Se crea la ventana principal
 window = tk.Tk()
 window.title("Cálculo de Aceleración")
 
-#Etiqueta y campo de entrada para el ángulo
+#Etiqueta y el campo de entrada para el ángulo
 angulo_label = tk.Label(window, text="Ángulo:")
 angulo_label.pack()
 angulo_entry = tk.Entry(window)
 angulo_entry.pack()
 
-#Etiqueta y campo de entrada para la masa
+#Etiqueta y el campo de entrada para la masa
 masa_label = tk.Label(window, text="Masa:")
 masa_label.pack()
 masa_entry = tk.Entry(window)
 masa_entry.pack()
 
-#Etiqueta y campo de entrada para el coeficiente de roce
+#Etiqueta y el campo de entrada para el coeficiente de roce
 coeficiente_roce_label = tk.Label(window, text="Coeficiente de Roce:")
 coeficiente_roce_label.pack()
 coeficiente_roce_entry = tk.Entry(window)
@@ -111,5 +114,5 @@ resultado_label.pack()
 canvas = tk.Canvas(window, width=500, height=500)
 canvas.pack()
 
-#Iniciar el bucle principal de la interfaz gráfica
+#Se utiliza un loop para crear el bucle principal de la interfaz gráfica.
 window.mainloop() 
