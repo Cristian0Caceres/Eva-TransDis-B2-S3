@@ -1,5 +1,12 @@
-# Eva-TransDis-B2-S3
-Trabajo programacion y fisica uct
-#completar
-guia instalacion
-descargar el ejecutable dentro del repositorio
+Nombre del proyecto: Simulador De plano inclinado [B2-S3]
+Descripción: el programa generado posee la capacidad de calcular la aceleración dentro de un plano inclinado graficándolo con animación y la muestra de las formulas empleadas para el calculo tratando de acercarnos lo mas posible al hecho físico real dando la posibilidad de trabajar con roce y con la ausencia de este
+Evento físico a simular: aceleración de plano inclinado
+Descripción del origen: el descubridor real de el plano inclinado no esta claro en su totalidad ya que pese a que el matemático Simon Estevin fue quien planto por primera ves las leyes que a día de hoy rigen a el plano inclinado. Se tiene evidencia que el astrónomo Galileo Galilei uso un plano inclinado para tener mediciones precisas y mucho más atrás en el tiempo es también posible rastrear sus orígenes ya que los egipcios utilizaron el plano inclinado al igual que los griegos para la construcción de sus pirámides y templos  
+Matemática empleada: los modelos matemáticos empleados se componen de:  la descomposición de fuerzas para descomponer el peso y dejarlo en peso x y peso y para su uso, la ley de roce esto lo usamos para calcular en el plano inclinado usando el roce, ley de conservación de la energía (energía cinética y energía potencial), 
+Resolución:
+Aplicaciones: las aplicaciones de los planos inclinados pueden ir desde facilitar el movimiento y transporte de objetos ejemplos de estos son las rampas y cuñas las primeras sirven para facilitar el acceso un ejemplo de eso son las rampas para discapacitados y el uso de las cuñas va a detener objetos o vehículos 
+Programación:
+descripción de herramientas utilizadas: usamos las librerías math para los cálculos precisos de los ángulos, la librería tkinter para generar el programa y los mensajes de error
+guía de instalación: para la instalación del programa descargar el archivo en el siguiente link y ya https://www.mediafire.com/file/niusyy4djr50zax/simulador_de_plano_inclinado_version_0.1.exe/file
+guía de uso: para usar el programa debes de ingresar los parámetros solicitados por el programa estos valores deben ser puestos desde el teclado numérico de su computador si su computador no posee un teclado numérico puede usar los números disponibles en la parte superior de su teclado. Para hacer cálculos en el programa deberá ingresar el valor de 1 de los ángulos, el valor de la masa del objeto y el coeficiente de roce el cual debe ser un valor entre 0 y 1 además de ser expresado con “.” y no “,” 
+enlace video con código desarrollado:
