@@ -2,7 +2,9 @@
 import math
 import tkinter as tk
 from tkinter import messagebox
-#
+#boton de ayuda
+def mostrar_ayuda():
+    messagebox.showinfo("este es un mensaje de prueba del bboton de ayuda.")
 #Se crea una funcion en la cual se ejecuten las formulas necesarias en el plano inclinado.
 def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     g = 9.8
@@ -86,6 +88,8 @@ angulo_label = tk.Label(window, text="Ángulo:")
 angulo_label.pack()
 angulo_entry = tk.Entry(window)
 angulo_entry.pack()
+#Etiqueta y campo de entrada del boton de ayuda
+Boton_De_Ayuda=tk.Button(window, text="¿Nesesitas Ayuda?", command=mostrar_ayuda)
 
 #Etiqueta y campo de entrada para la masa
 masa_label = tk.Label(window, text="Masa:")
