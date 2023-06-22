@@ -67,13 +67,13 @@ def calcular_button_click():
         aceleracion, masa_objeto, angulo_objeto, roce, fuerza_neta, pesox, pesoy = calcular_aceleracion(angulo, masa, coeficiente_roce)
 
 #Se escriben los reslutados con sus respectivas formulas del como se llegaron a estos.
-        resultado_text.set(f"Aceleración: {aceleracion}\n"
-                           f"Masa: {masa_objeto}\n"
-                           f"Ángulo: {angulo_objeto}\n"
-                           f"Fuerza de Roce = (N x μ) = {roce}\n"
-                           f"Fuerza Neta: P + N + Fr = {fuerza_neta}\n"
-                           f"Peso en X = P x sen(α) = {pesox}\n"
-                           f"Peso en Y = P x cos(α) = {pesoy}")
+        resultado_text.set(f"Aceleración: {aceleracion} m/s²\n"
+                           f"Masa: {masa_objeto} kg \n"
+                           f"Ángulo: {angulo_objeto} ° \n"
+                           f"Fuerza de Roce = (N x μ) = {roce} N \n"
+                           f"Fuerza Neta: P + N + Fr = {fuerza_neta} N \n"
+                           f"Peso en X = P x sen(α) = {pesox} N \n"
+                           f"Peso en Y = P x cos(α) = {pesoy} N ")
         
         dibujar_triangulo(angulo)
 
