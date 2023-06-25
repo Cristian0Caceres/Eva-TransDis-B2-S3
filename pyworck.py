@@ -33,29 +33,52 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
 
 #Se crea una funcion en la cual se centrara en la visualizacion del triangulo rectangulo del plano inclinado.
 def dibujar_triangulo(angulo):
-    canvas.delete("triangulo")  #se borra cualquier triángulo dibujado previamente al ingresar nuevos datos.
+    canvas.delete("triangulo")
 
-    #Convertir el ángulo a radianes por funcionalidad.
     radianes = math.radians(angulo)
 
-    #Coordenadas del vértice del ángulo agudo
     x1 = 40
     y1 = 450
 
-    #Longitud del cateto adyacente y cateto opuesto
     cateto_adyacente = 420
     cateto_opuesto = cateto_adyacente * math.tan(radianes)
 
-    #Coordenadas del segundo vértice (en el cateto adyacente)
     x2 = x1 + cateto_adyacente
     y2 = y1
 
-    #Coordenadas del tercer vértice (en el cateto opuesto)
     x3 = x1
     y3 = y1 - cateto_opuesto
 
-    #Se dibuja el triángulo en el lienzo
     canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
+
+    masa_size = 75
+    masa_x = x1 + cateto_adyacente * 0.5 - masa_size * 0.5
+    masa_y = y1 - cateto_opuesto * 0.63 - masa_size * 0.5
+
+    # Calcula el ángulo de inclinación de la masa
+    masa_angle = math.degrees(math.atan(cateto_opuesto / cateto_adyacente))
+
+     # Rota la masa utilizando transformaciones de coordenadas
+    cx = masa_x + masa_size / 2
+    cy = masa_y + masa_size / 2
+
+    canvas.create_polygon(
+        rotate_point(masa_x, masa_y, cx, cy, masa_angle),
+        rotate_point(masa_x + masa_size, masa_y, cx, cy, masa_angle),
+        rotate_point(masa_x + masa_size, masa_y + masa_size, cx, cy, masa_angle),
+        rotate_point(masa_x, masa_y + masa_size, cx, cy, masa_angle),
+        outline="black", fill="red", tags="triangulo"
+    )
+
+def rotate_point(x, y, cx, cy, theta):
+    # Aplica la fórmula de rotación a un punto
+    cos_theta = math.cos(math.radians(theta))
+    sin_theta = math.sin(math.radians(theta))
+
+    nx = (x - cx) * cos_theta - (y - cy) * sin_theta + cx
+    ny = (x - cx) * sin_theta + (y - cy) * cos_theta + cy
+
+    return nx, ny     
 
 #Se crea una funcion que se centrara en la ventana de Tkinter en donde el usuario podra ingresar los datos.
 def calcular_button_click():
