@@ -114,5 +114,7 @@ resultado_label.pack()
 canvas = tk.Canvas(window, width=500, height=500)
 canvas.pack()
 
+dibujar_triangulo(45)
+
 #Se utiliza un loop para crear el bucle principal de la interfaz gráfica.
 window.mainloop() 
