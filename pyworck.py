@@ -2,6 +2,7 @@
 import math
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk, ImageDraw, ImageFont
 
 #Se crea una funcion en la cual se ejecuten las formulas necesarias en el plano inclinado, la cual trabaja con el ingreso del angulo, masa y coeficiente de roce.
 def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
@@ -103,27 +104,88 @@ def calcular_button_click():
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
-#Se crea la ventana principal
+def abrir_ventana_ayuda_angulo():
+    ventana_ayuda = tk.Toplevel(window)
+    ventana_ayuda.title("¿Que es el angulo?")
+    ayuda_texto = tk.Text(ventana_ayuda)
+    ayuda_texto.insert(tk.END, "aqui debe estar la ayuda")
+    ayuda_texto.pack()
+    
+def abrir_ventana_ayuda_masa():
+    ventana_ayuda = tk.Toplevel(window)
+    ventana_ayuda.title("¿Que es la masa?")
+    ayuda_texto = tk.Text(ventana_ayuda)
+    ayuda_texto.insert(tk.END, "aqui debe estar la ayuda")
+    ayuda_texto.pack()
+
+def abrir_ventana_ayuda_coeficiente_roce():
+    ventana_ayuda = tk.Toplevel(window)
+    ventana_ayuda.title("¿Que es el Coeficiente de Roce?")
+    ayuda_texto = tk.Text(ventana_ayuda)
+    ayuda_texto.insert(tk.END, "aqui debe estar la ayuda")
+    ayuda_texto.pack()
+
+
+def create_round_button(master, command=None):
+    # Crear una imagen redonda con un signo de interrogación blanco en el centro
+    size = 30
+    background_color = "#4AC0CD"
+    question_mark_color = "white"
+    
+    image = Image.new("RGBA", (size, size), background_color)
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.truetype("arial", 18)
+    text = "?"
+    text_width, text_height = draw.textsize(text, font=font)
+    text_position = ((image.width - text_width) // 2, (image.height - text_height) // 2)
+    draw.text(text_position, text, fill=question_mark_color, font=font)
+
+    # Crear una máscara redonda
+    mask = Image.new("L", (size, size), 0)
+    draw_mask = ImageDraw.Draw(mask)
+    draw_mask.ellipse((0, 0, size, size), fill=255)
+
+    # Aplicar la máscara a la imagen
+    image.putalpha(mask)
+
+    # Convertir la imagen de Pillow a un objeto PhotoImage de Tkinter
+    photo = ImageTk.PhotoImage(image)
+
+    # Crear el botón y asignar la imagen
+    button = tk.Button(master, image=photo, relief="flat", bd=0, command=command)
+    button.image = photo
+
+    return button
+    
+# Crear la ventana principal
 window = tk.Tk()
 window.title("Cálculo de Aceleración")
 
-#Etiqueta y el campo de entrada para el ángulo
-angulo_label = tk.Label(window, text="Ángulo:")
-angulo_label.pack()
-angulo_entry = tk.Entry(window)
-angulo_entry.pack()
+# Frame para los campos de entrada y botones
+input_frame = tk.Frame(window)
+input_frame.pack(side="top", pady=10)
 
-#Etiqueta y el campo de entrada para la masa
-masa_label = tk.Label(window, text="Masa:")
-masa_label.pack()
-masa_entry = tk.Entry(window)
-masa_entry.pack()
+# Grupo para el ángulo
+angulo_group = tk.Frame(input_frame)
+angulo_label = tk.Label(angulo_group, text="Ángulo:")
+angulo_entry = tk.Entry(angulo_group)
+round_button1 = create_round_button(angulo_group, command=abrir_ventana_ayuda_angulo)
+angulo_group.pack(side="top"), angulo_label.pack(side="top"), angulo_entry.pack(side="top"), round_button1.pack(side="top")
 
-#Etiqueta y el campo de entrada para el coeficiente de roce
-coeficiente_roce_label = tk.Label(window, text="Coeficiente de Roce:")
-coeficiente_roce_label.pack()
-coeficiente_roce_entry = tk.Entry(window)
-coeficiente_roce_entry.pack()
+
+# Grupo para la masa
+masa_group = tk.Frame(input_frame)
+masa_label = tk.Label(masa_group, text="Masa:")
+masa_entry = tk.Entry(masa_group)
+round_button2 = create_round_button(masa_group, command=abrir_ventana_ayuda_masa)
+masa_group.pack(side="top"), masa_label.pack(side="top"), masa_entry.pack(side="top"), round_button2.pack(side="top")
+
+# Grupo para el coeficiente de roce
+coeficiente_roce_group = tk.Frame(input_frame)
+coeficiente_roce_label = tk.Label(coeficiente_roce_group, text="Coeficiente de Roce:")
+coeficiente_roce_entry = tk.Entry(coeficiente_roce_group)
+round_button3 = create_round_button(coeficiente_roce_group, command=abrir_ventana_ayuda_coeficiente_roce)
+coeficiente_roce_group.pack(side="top"), coeficiente_roce_label.pack(side="top"), coeficiente_roce_entry.pack(side="top"), round_button3.pack(side="top")
 
 #Botón de cálculo
 calcular_button = tk.Button(window, text="Calcular", command=calcular_button_click)
