@@ -68,7 +68,7 @@ def dibujar_triangulo(angulo):
         rotate_point(masa_x + masa_size, masa_y, cx, cy, masa_angle),
         rotate_point(masa_x + masa_size, masa_y + masa_size, cx, cy, masa_angle),
         rotate_point(masa_x, masa_y + masa_size, cx, cy, masa_angle),
-        outline="black", fill="red", tags="triangulo"
+        outline="black", fill="pink", tags="triangulo"
     )
 
 def rotate_point(x, y, cx, cy, theta):
