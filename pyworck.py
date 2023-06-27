@@ -1,6 +1,7 @@
 #Se importan las librerias necesarias para realizar el codigo.
 import math
 import tkinter as tk
+from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk, ImageDraw, ImageFont
 
@@ -49,17 +50,23 @@ def dibujar_triangulo(angulo):
 
     x3 = x1
     y3 = y1 - cateto_opuesto
+    background_color = window.cget("bg")
 
-    canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
+    if angulo > 50:
+        canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill=background_color, tags="triangulo")
+    else:
+        canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
 
     masa_size = 75
-    masa_x = x1 + cateto_adyacente * 0.5 - masa_size * 0.5
-    masa_y = y1 - cateto_opuesto * 0.63 - masa_size * 0.5
+    masa_distance = 0.519 # Porcentaje de la hipotenusa donde se ubicará el cuadrado
+
+    masa_x = x1 + cateto_adyacente * masa_distance - masa_size * 0.5
+    masa_y = y1 - cateto_opuesto * masa_distance - masa_size 
 
     # Calcula el ángulo de inclinación de la masa
     masa_angle = math.degrees(math.atan(cateto_opuesto / cateto_adyacente))
 
-     # Rota la masa utilizando transformaciones de coordenadas
+    # Rota la masa utilizando transformaciones de coordenadas
     cx = masa_x + masa_size / 2
     cy = masa_y + masa_size / 2
 
@@ -70,7 +77,6 @@ def dibujar_triangulo(angulo):
         rotate_point(masa_x, masa_y + masa_size, cx, cy, masa_angle),
         outline="black", fill="pink", tags="triangulo"
     )
-
 def rotate_point(x, y, cx, cy, theta):
     # Aplica la fórmula de rotación a un punto
     cos_theta = math.cos(math.radians(theta))
@@ -107,9 +113,18 @@ def calcular_button_click():
 def abrir_ventana_ayuda_angulo():
     ventana_ayuda = tk.Toplevel(window)
     ventana_ayuda.title("¿Que es el angulo?")
-    ayuda_texto = tk.Text(ventana_ayuda)
-    ayuda_texto.insert(tk.END, "aqui debe estar la ayuda")
-    ayuda_texto.pack()
+    titulo_label = tk.Label(ventana_ayuda, text="¿Qué es el ángulo?", font=("Arial", 16, "bold"))
+    titulo_label.pack()
+
+    contenido_text = tk.Text(ventana_ayuda, width=40, height=10, font=("Arial", 12))
+    contenido_text.insert(tk.END, "Un ángulo es la figura formada por dos rayos o dos segmentos de recta que tienen un punto en común, llamado vértice. Los ángulos se miden en grados y nos permiten describir y medir la apertura entre dos líneas o superficies.")
+    contenido_text.configure(state="disabled")
+    contenido_text.pack()
+
+    # Ajustar tamaño del widget al contenido
+    contenido_text.update_idletasks()
+    contenido_text.config(width=max(contenido_text.winfo_width(), 40), height=max(contenido_text.winfo_height(), 10))
+
     
 def abrir_ventana_ayuda_masa():
     ventana_ayuda = tk.Toplevel(window)
@@ -196,7 +211,7 @@ resultado_text = tk.StringVar()
 resultado_label = tk.Label(window, textvariable=resultado_text)
 resultado_label.pack()
 
-canvas = tk.Canvas(window, width=500, height=500)
+canvas = tk.Canvas(window, width=600, height=450)
 canvas.pack()
 
 dibujar_triangulo(45)
