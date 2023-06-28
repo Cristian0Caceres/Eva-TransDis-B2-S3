@@ -33,7 +33,7 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
 #Se devueleven todos los datos por funcionalidad.
     return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)
 
-#Se crea una funcion en la cual se centrara en la visualizacion del triangulo rectangulo del plano inclinado.
+#Se crea una funcion en la cual se centrara en la visualizacion del triangulo rectangulo y la masa del plano inclinado.
 def dibujar_triangulo(angulo):
     canvas.delete("triangulo")
 
@@ -113,35 +113,29 @@ def calcular_button_click():
 def abrir_ventana_ayuda_angulo():
     ventana_ayuda = tk.Toplevel(window)
     ventana_ayuda.title("¿Qué es el ángulo?")
+    ventana_ayuda.geometry("450x350")  # Ajusta las dimensiones de la ventana según tus necesidades
 
     # Contenido textual
-    titulo_label = tk.Label(ventana_ayuda, text="¿Qué es el ángulo?", font=("Arial", 20, "bold"))
+    titulo_label = tk.Label(ventana_ayuda, text="¿Qué representa el ángulo?", font=("Arial", 20, "bold"))
     titulo_label.pack()
 
-    contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 14))
+    contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 16))
 
-    # Párrafo 1
-    contenido_text.configure(text="Un ángulo es la figura formada por dos rayos o dos segmentos de recta que tienen un punto en común, llamado vértice.")
-
-    # Párrafo 2
-    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLos ángulos se pueden clasificar en diferentes tipos según su medida y características. Algunos tipos comunes de ángulos son:")
-
-    # Lista de tipos de ángulos
-    contenido_text.configure(text=contenido_text.cget("text") + "\n\n• Ángulo agudo: mide menos de 90 grados.")
-    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo recto: mide exactamente 90 grados.")
-    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo obtuso: mide más de 90 grados pero menos de 180 grados.")
-    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo llano: mide exactamente 180 grados.")
-    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo completo: mide exactamente 360 grados.")
-
-    # Párrafo 3
-    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLos ángulos se utilizan en diversas áreas, como la geometría, la física y la trigonometría. Son fundamentales para describir y medir la apertura entre dos líneas o superficies.")
-
+    #Párrafo
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLa función del angulo en el plano inclinado es determinar la facilidad")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\ncon la cual el objeto se desliza por el plano (no es el unico que lo determina)")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nentre mayor sea el angulo, mas facil sera para el objeto deslizarce ")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\ny entre menor sea, mas dificil se le hara, este angulo puede llegar a los 360 grados")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\npero en el caso del plano inclinado solo hasta los 90 grados")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nEjemplo visual del como efecta el angulo a la masa:")
+    
     contenido_text.pack()
 
-    # Imagen
-    imagen_path = r"C:/Users/karik/OneDrive/Escritorio/imagendeejemplo.jpg"  # Reemplaza con la ruta de tu imagen
+    #Imagen
+    imagen_path = r"C:\Users\karik\OneDrive\Escritorio\anguloplanoej1.png"  # Reemplaza con la ruta de tu imagen
     imagen = Image.open(imagen_path)
-    imagen = imagen.resize((400, 400))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
     imagen_tk = ImageTk.PhotoImage(imagen)
     imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
     imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
