@@ -138,6 +138,7 @@ center_x, center_y = 200, 200
 
 update_arrows(1)  # Inicialmente, la masa es 1
 
+root.mainloop() 
 
 #Se crea una funcion que se centrara en la ventana de Tkinter en donde el usuario podra ingresar los datos.
 def calcular_button_click():
