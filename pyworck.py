@@ -107,39 +107,9 @@ def rotate_point(x, y, cx, cy, theta):
 
     return nx, ny
 
-
 def on_mass_change(event):
     mass = mass_scale.get()
     update_arrows(mass)
-
-def update_arrows(mass):
-    canvas.delete("arrow")
-
-    for angle in angles:
-        arrow_length = mass * 10  # Ajusta el factor de escala según tus necesidades
-        x = arrow_length * math.cos(math.radians(angle))
-        y = arrow_length * math.sin(math.radians(angle))
-        canvas.create_line(center_x, center_y, center_x + x, center_y + y, arrow="last", tags="arrow")
-
-def clear_arrows():
-    for arrow_id in arrow_ids:
-        canvas.delete(arrow_id)
-    arrow_ids.clear()
-
-root = Tk()
-
-canvas = Canvas(root, width=400, height=400)
-canvas.pack()
-
-mass_scale = Scale(root, from_=1, to=10, orient=HORIZONTAL, command=on_mass_change)
-mass_scale.pack()
-
-angles = [45, 90, 135, 180, 225, 270, 315, 360]
-center_x, center_y = 200, 200
-
-update_arrows(1)  # Inicialmente, la masa es 1
-
-root.mainloop()
 
 #Se crea una funcion que se centrara en la ventana de Tkinter en donde el usuario podra ingresar los datos.
 def calcular_button_click():
