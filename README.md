@@ -7,6 +7,6 @@ Resolución:
 Aplicaciones: las aplicaciones de los planos inclinados pueden ir desde facilitar el movimiento y transporte de objetos ejemplos de estos son las rampas y cuñas las primeras sirven para facilitar el acceso un ejemplo de eso son las rampas para discapacitados y el uso de las cuñas va a detener objetos o vehículos 
 Programación:
 descripción de herramientas utilizadas: usamos las librerías math para los cálculos precisos de los ángulos, la librería tkinter para generar el programa y los mensajes de error
-guía de instalación: para la instalación del programa descargar el archivo en el siguiente link y ya https://www.mediafire.com/file/niusyy4djr50zax/simulador_de_plano_inclinado_version_0.1.exe/file
+guía de instalación: para la instalación del programa descargar el archivo en el siguiente link y ya https://www.mediafire.com/file/5kl5bel2mpijoul/PlanoInclinado.exe/file
 guía de uso: para usar el programa debes de ingresar los parámetros solicitados por el programa estos valores deben ser puestos desde el teclado numérico de su computador si su computador no posee un teclado numérico puede usar los números disponibles en la parte superior de su teclado. Para hacer cálculos en el programa deberá ingresar el valor de 1 de los ángulos, el valor de la masa del objeto y el coeficiente de roce el cual debe ser un valor entre 0 y 1 además de ser expresado con “.” y no “,” 
 enlace video con código desarrollado: https://youtu.be/6QcLAxmYwlI
