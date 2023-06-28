@@ -133,7 +133,7 @@ def abrir_ventana_ayuda_angulo():
     contenido_text.pack()
 
     #Imagen
-    imagen_path = r"C:\Users\Asus\Documents\GitHub\Eva-TransDis-B2-S3\anguloplanoej1.png"  # Reemplaza con la ruta de tu imagen
+    imagen_path = "anguloplanoej1.png"  # Reemplaza con la ruta de tu imagen
     imagen = Image.open(imagen_path)
     imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
     imagen_tk = ImageTk.PhotoImage(imagen)
@@ -148,17 +148,71 @@ def abrir_ventana_ayuda_angulo():
     
 def abrir_ventana_ayuda_masa():
     ventana_ayuda = tk.Toplevel(window)
-    ventana_ayuda.title("¿Que es la masa?")
-    ayuda_texto = tk.Text(ventana_ayuda)
-    ayuda_texto.insert(tk.END, "aqui debe estar la ayuda")
-    ayuda_texto.pack()
+    ventana_ayuda.title("¿Qué es la masa?")
+    ventana_ayuda.geometry("450x350")  # Ajusta las dimensiones de la ventana según tus necesidades
+
+    # Contenido textual
+    titulo_label = tk.Label(ventana_ayuda, text="¿Qué representa la masa?", font=("Arial", 20, "bold"))
+    titulo_label.pack()
+
+    contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 16))
+
+    #Párrafo
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLa función de la masa en el plano inclinado es determinar la interaccion de gravedad en el peso y la aceleracion delntro del objeto")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\ncon esto se determina como el objeto se desliza por el plano (no es el unico que lo determina)")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nentre mayor sea la masa, mas dificill sera para el objeto deslizarce ")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\ny entre menor sea, mas facil se le hara")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nEl Valor deve estar entre 0 a infinito positivo")
+    
+    contenido_text.pack()
+
+    #Imagen
+    imagen_path = "peso-fisica.png"  # Reemplaza con la ruta de tu imagen
+    imagen = Image.open(imagen_path)
+    imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen_tk = ImageTk.PhotoImage(imagen)
+    imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
+    imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
+    imagen_label.pack()
+
+    # Ajustar tamaño de la ventana al contenido
+    ventana_ayuda.update_idletasks()
+    ventana_ayuda.geometry(f"{ventana_ayuda.winfo_width()*2}x{ventana_ayuda.winfo_height()*2}")
 
 def abrir_ventana_ayuda_coeficiente_roce():
     ventana_ayuda = tk.Toplevel(window)
-    ventana_ayuda.title("¿Que es el Coeficiente de Roce?")
-    ayuda_texto = tk.Text(ventana_ayuda)
-    ayuda_texto.insert(tk.END, "aqui debe estar la ayuda")
-    ayuda_texto.pack()
+    ventana_ayuda.title("¿Qué es el coeficiente  de roce?")
+    ventana_ayuda.geometry("450x350")  # Ajusta las dimensiones de la ventana según tus necesidades
+
+    # Contenido textual
+    titulo_label = tk.Label(ventana_ayuda, text="¿Qué representa el coeficiente de roce?", font=("Arial", 20, "bold"))
+    titulo_label.pack()
+
+    contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 16))
+
+    #Párrafo
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLa función del coeficiente de roce es la de determinar junto a la normal y la distancia")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\ncomo  el objeto se desliza por el plano (no es el unico que lo determina) ")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nentre mayor sea el coeficiente de roce, seria mas dificil  para el objeto deslizarce ")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\ny entre menor sea, mas facil se le hara")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nEl Valor deve estar entre 0 y 1 y ingresando los decimales con un . y no una ,")
+    
+    contenido_text.pack()
+
+    #Imagen
+    imagen_path = "roce.jpg"  # Reemplaza con la ruta de tu imagen
+    imagen = Image.open(imagen_path)
+    imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen_tk = ImageTk.PhotoImage(imagen)
+    imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
+    imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
+    imagen_label.pack()
+
+    # Ajustar tamaño de la ventana al contenido
+    ventana_ayuda.update_idletasks()
+    ventana_ayuda.geometry(f"{ventana_ayuda.winfo_width()*2}x{ventana_ayuda.winfo_height()*2}")
 
 
 def create_round_button(master, command=None):
