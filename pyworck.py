@@ -112,18 +112,44 @@ def calcular_button_click():
 
 def abrir_ventana_ayuda_angulo():
     ventana_ayuda = tk.Toplevel(window)
-    ventana_ayuda.title("¿Que es el angulo?")
-    titulo_label = tk.Label(ventana_ayuda, text="¿Qué es el ángulo?", font=("Arial", 16, "bold"))
+    ventana_ayuda.title("¿Qué es el ángulo?")
+
+    # Contenido textual
+    titulo_label = tk.Label(ventana_ayuda, text="¿Qué es el ángulo?", font=("Arial", 20, "bold"))
     titulo_label.pack()
 
-    contenido_text = tk.Text(ventana_ayuda, width=40, height=10, font=("Arial", 12))
-    contenido_text.insert(tk.END, "Un ángulo es la figura formada por dos rayos o dos segmentos de recta que tienen un punto en común, llamado vértice. Los ángulos se miden en grados y nos permiten describir y medir la apertura entre dos líneas o superficies.")
-    contenido_text.configure(state="disabled")
+    contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 14))
+
+    # Párrafo 1
+    contenido_text.configure(text="Un ángulo es la figura formada por dos rayos o dos segmentos de recta que tienen un punto en común, llamado vértice.")
+
+    # Párrafo 2
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLos ángulos se pueden clasificar en diferentes tipos según su medida y características. Algunos tipos comunes de ángulos son:")
+
+    # Lista de tipos de ángulos
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\n• Ángulo agudo: mide menos de 90 grados.")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo recto: mide exactamente 90 grados.")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo obtuso: mide más de 90 grados pero menos de 180 grados.")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo llano: mide exactamente 180 grados.")
+    contenido_text.configure(text=contenido_text.cget("text") + "\n• Ángulo completo: mide exactamente 360 grados.")
+
+    # Párrafo 3
+    contenido_text.configure(text=contenido_text.cget("text") + "\n\nLos ángulos se utilizan en diversas áreas, como la geometría, la física y la trigonometría. Son fundamentales para describir y medir la apertura entre dos líneas o superficies.")
+
     contenido_text.pack()
 
-    # Ajustar tamaño del widget al contenido
-    contenido_text.update_idletasks()
-    contenido_text.config(width=max(contenido_text.winfo_width(), 40), height=max(contenido_text.winfo_height(), 10))
+    # Imagen
+    imagen_path = r"C:/Users/karik/OneDrive/Escritorio/imagendeejemplo.jpg"  # Reemplaza con la ruta de tu imagen
+    imagen = Image.open(imagen_path)
+    imagen = imagen.resize((400, 400))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen_tk = ImageTk.PhotoImage(imagen)
+    imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
+    imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
+    imagen_label.pack()
+
+    # Ajustar tamaño de la ventana al contenido
+    ventana_ayuda.update_idletasks()
+    ventana_ayuda.geometry(f"{ventana_ayuda.winfo_width()*2}x{ventana_ayuda.winfo_height()*2}")
 
     
 def abrir_ventana_ayuda_masa():
