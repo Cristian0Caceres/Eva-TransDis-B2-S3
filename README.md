@@ -46,7 +46,7 @@ este es el lenguaje el cual se encuentra en su ultima version
 1-[Tkinter](https://docs.python.org/es/3/library/tkinter.html)
 Tkinter es una de las herramientas para empezar en lo que es las interfazes graficas y lo utilisamos para la creacion de todo el ambito grafico del programa
 
-2-[Tkinter](https://docs.python.org/3/library/math.html)
+2-[math](https://docs.python.org/3/library/math.html)
 Este módulo proporciona acceso a las funciones matemáticas definidas por el estándar C y fueutilizado para el calculo de los angulos usando radianes
 
 ### guia de instalacion
