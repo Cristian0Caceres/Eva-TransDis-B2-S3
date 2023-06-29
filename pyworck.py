@@ -1,13 +1,19 @@
-#Se importan las librerias necesarias para realizar el codigo.
+#------------------------------------------------------------------------------------------------------------------------
+#importacion de librerias las cuales se usaran durante el programa
+#------------------------------------------------------------------------------------------------------------------------
+
 import math
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk, ImageDraw, ImageFont
 
-#Se crea una funcion en la cual se ejecuten las formulas necesarias en el plano inclinado, la cual trabaja con el ingreso del angulo, masa y coeficiente de roce.
+
+#------------------------------------------------------------------------------------------------------------------------
+#creacion de funcion la cual calcula todo dentro del plano inclinado 
+#------------------------------------------------------------------------------------------------------------------------
 def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
-    g = 9.8
+    g = 9.8#definicion de la gravedad como 9.8 la cual corresponde a la gravedad de la tierra
     peso = masa * g
     radianes = (angulo * math.pi) / 180
     seno = math.sin(radianes)
@@ -15,29 +21,31 @@ def calcular_aceleracion(angulo, masa, coeficiente_roce=0):
     pesox = seno * peso
     pesoy = coseno * peso
 
+#-----------------------------------------------------------------------------------------------------
 #Se especifican los limites del coeficiente de roce y el angulo, si se salen de esto, genere un error.
+#-----------------------------------------------------------------------------------------------------
+
     if coeficiente_roce < 0 or coeficiente_roce > 1:
         raise ValueError("El coeficiente de roce debe estar entre 0 y 1")
     if angulo < 1 or angulo > 90:
         raise ValueError("El angulo debe estar entre 1 y 89 grados")
     
-    #Se iguala el peso en Y con la fuerza normal.
-    N = pesoy
+    N = pesoy#Se iguala el peso en Y con la fuerza normal.
     roce = round(N * coeficiente_roce, 2)
-    # Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
-    fuerza_neta = round(pesox - roce, 2)
+    fuerza_neta = round(pesox - roce, 2)# Calcular la fuerza neta (componente x del peso menos la fuerza de roce)
     fuerza_neta = max(fuerza_neta, 0)
-    #Calcular la aceleración con roce.
-    aceleracion = round(fuerza_neta / masa, 2)
+    aceleracion = round(fuerza_neta / masa, 2)#Calcular la aceleración con roce.
+    return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)#Se devueleven todos los datos por funcionalidad.
 
-#Se devueleven todos los datos por funcionalidad.
-    return aceleracion, round(masa, 2), angulo, roce, fuerza_neta, round(pesox, 2), round(pesoy, 2)
 
+#------------------------------------------------------------------------------------------------------------------------
 #Se crea una funcion en la cual se centrara en la visualizacion del triangulo rectangulo y la masa del plano inclinado.
+#en conjunto a la debida modificacion del triangulo cada ves que se actualiza el anteriormente mencionado
+#------------------------------------------------------------------------------------------------------------------------
 def dibujar_triangulo(angulo):
     canvas.delete("triangulo")
 
-    radianes = math.radians(angulo)
+    radianes = math.radians(angulo)#se calculan los radianes respecto al angulo ingresado por el usuario
 
     x1 = 40
     y1 = 450
@@ -52,25 +60,24 @@ def dibujar_triangulo(angulo):
     y3 = y1 - cateto_opuesto
     background_color = window.cget("bg")
 
-    if angulo > 50:
+    if angulo > 50: #cuando el angulo es mayor a 50 grados el triangulo se vuelve ""transparente"""
         canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill=background_color, tags="triangulo")
     else:
         canvas.create_polygon(x1, y1, x2, y2, x3, y3, outline="black", fill="lightblue", tags="triangulo")
 
     masa_size = 75
-    masa_distance = 0.519 # Porcentaje de la hipotenusa donde se ubicará el cuadrado
+    masa_distance = 0.519 #Porcentaje de la hipotenusa donde se ubicará el cuadrado
 
     masa_x = x1 + cateto_adyacente * masa_distance - masa_size * 0.5
     masa_y = y1 - cateto_opuesto * masa_distance - masa_size 
 
-    # Calcula el ángulo de inclinación de la masa
-    masa_angle = math.degrees(math.atan(cateto_opuesto / cateto_adyacente))
+   
+    masa_angle = math.degrees(math.atan(cateto_opuesto / cateto_adyacente)) #Calcula el ángulo de inclinación de la masa
 
-    # Rota la masa utilizando transformaciones de coordenadas
-    cx = masa_x + masa_size / 2
+    cx = masa_x + masa_size / 2 #Rota la masa utilizando transformaciones de coordenadas
     cy = masa_y + masa_size / 2
 
-    canvas.create_polygon(
+    canvas.create_polygon( #creamos al triangulo rosa usando la variable canvas.create_polygon
         rotate_point(masa_x, masa_y, cx, cy, masa_angle),
         rotate_point(masa_x + masa_size, masa_y, cx, cy, masa_angle),
         rotate_point(masa_x + masa_size, masa_y + masa_size, cx, cy, masa_angle),
@@ -78,7 +85,7 @@ def dibujar_triangulo(angulo):
         outline="black", fill="pink", tags="triangulo"
     )
 def rotate_point(x, y, cx, cy, theta):
-    # Aplica la fórmula de rotación a un punto
+    #Aplica la fórmula de rotación a un punto
     cos_theta = math.cos(math.radians(theta))
     sin_theta = math.sin(math.radians(theta))
 
@@ -87,7 +94,10 @@ def rotate_point(x, y, cx, cy, theta):
 
     return nx, ny     
 
+
+#------------------------------------------------------------------------------------------------------------------------
 #Se crea una funcion que se centrara en la ventana de Tkinter en donde el usuario podra ingresar los datos.
+#------------------------------------------------------------------------------------------------------------------------
 def calcular_button_click():
     try:
         angulo = float(angulo_entry.get())
@@ -96,7 +106,7 @@ def calcular_button_click():
 
         aceleracion, masa_objeto, angulo_objeto, roce, fuerza_neta, pesox, pesoy = calcular_aceleracion(angulo, masa, coeficiente_roce)
 
-#Se escriben los reslutados con sus respectivas formulas del como se llegaron a estos.
+
         resultado_text.set(f"Aceleración: {aceleracion} m/s²\n"
                            f"Masa: {masa_objeto} kg \n"
                            f"Ángulo: {angulo_objeto} ° \n"
@@ -104,12 +114,16 @@ def calcular_button_click():
                            f"Fuerza Neta: P + N + Fr = {fuerza_neta} N \n"
                            f"Peso en X = P x sen(α) = {pesox} N \n"
                            f"Peso en Y = P x cos(α) = {pesoy} N ")
+                           #Se escriben los reslutados con sus respectivas formulas del como se llegaron a estos.
         
         dibujar_triangulo(angulo)
 
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
+#------------------------------------------------------------------------------------------------------------------------
+#definicion de la funcion de ventana de ayuda angulo la cual genera una ayuda para guiar al usuario
+#------------------------------------------------------------------------------------------------------------------------
 def abrir_ventana_ayuda_angulo():
     ventana_ayuda = tk.Toplevel(window)
     ventana_ayuda.title("¿Qué es el ángulo?")
@@ -133,31 +147,33 @@ def abrir_ventana_ayuda_angulo():
     contenido_text.pack()
 
     #Imagen
-    imagen_path = "anguloplanoej1.png"  # Reemplaza con la ruta de tu imagen
+    imagen_path = "anguloplanoej1.png"  #Reemplaza con la ruta de tu imagen
     imagen = Image.open(imagen_path)
-    imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen = imagen.resize((800, 300))  #Ajusta el tamaño de la imagen según tus necesidades
     imagen_tk = ImageTk.PhotoImage(imagen)
     imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
-    imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
+    imagen_label.image = imagen_tk  #Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
     imagen_label.pack()
 
     # Ajustar tamaño de la ventana al contenido
     ventana_ayuda.update_idletasks()
     ventana_ayuda.geometry(f"{ventana_ayuda.winfo_width()*2}x{ventana_ayuda.winfo_height()*2}")
 
-    
+#------------------------------------------------------------------------------------------------------------------------
+#definicion de la funcion de ventana de ayuda masa(se repiten comentarios del angulo)
+#------------------------------------------------------------------------------------------------------------------------
 def abrir_ventana_ayuda_masa():
     ventana_ayuda = tk.Toplevel(window)
     ventana_ayuda.title("¿Qué es la masa?")
-    ventana_ayuda.geometry("450x350")  # Ajusta las dimensiones de la ventana según tus necesidades
+    ventana_ayuda.geometry("450x350")
 
-    # Contenido textual
+   
     titulo_label = tk.Label(ventana_ayuda, text="¿Qué representa la masa?", font=("Arial", 20, "bold"))
     titulo_label.pack()
 
     contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 16))
 
-    #Párrafo
+  
     contenido_text.configure(text=contenido_text.cget("text") + "\n\nLa función de la masa en el plano inclinado es determinar la interaccion de gravedad en el peso y la aceleracion delntro del objeto")
     contenido_text.configure(text=contenido_text.cget("text") + "\n\ncon esto se determina como el objeto se desliza por el plano (no es el unico que lo determina)")
     contenido_text.configure(text=contenido_text.cget("text") + "\n\nentre mayor sea la masa, mas dificill sera para el objeto deslizarce ")
@@ -167,31 +183,33 @@ def abrir_ventana_ayuda_masa():
     
     contenido_text.pack()
 
-    #Imagen
-    imagen_path = "peso-fisica.png"  # Reemplaza con la ruta de tu imagen
+ 
+    imagen_path = "peso-fisica.png"  
     imagen = Image.open(imagen_path)
-    imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen = imagen.resize((800, 300))  
     imagen_tk = ImageTk.PhotoImage(imagen)
     imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
-    imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
+    imagen_label.image = imagen_tk  
     imagen_label.pack()
 
-    # Ajustar tamaño de la ventana al contenido
+   
     ventana_ayuda.update_idletasks()
     ventana_ayuda.geometry(f"{ventana_ayuda.winfo_width()*2}x{ventana_ayuda.winfo_height()*2}")
 
+#------------------------------------------------------------------------------------------------------------------------
+#definicion de la funcion de ventana de ayuda coeficiente de roce(se repiten comentarios del angulo)
+#------------------------------------------------------------------------------------------------------------------------
 def abrir_ventana_ayuda_coeficiente_roce():
     ventana_ayuda = tk.Toplevel(window)
     ventana_ayuda.title("¿Qué es el coeficiente  de roce?")
-    ventana_ayuda.geometry("450x350")  # Ajusta las dimensiones de la ventana según tus necesidades
+    ventana_ayuda.geometry("450x350")
 
-    # Contenido textual
+
     titulo_label = tk.Label(ventana_ayuda, text="¿Qué representa el coeficiente de roce?", font=("Arial", 20, "bold"))
     titulo_label.pack()
 
     contenido_text = tk.Label(ventana_ayuda, justify="left", font=("Arial", 16))
 
-    #Párrafo
     contenido_text.configure(text=contenido_text.cget("text") + "\n\nLa función del coeficiente de roce es la de determinar junto a la normal y la distancia")
     contenido_text.configure(text=contenido_text.cget("text") + "\n\ncomo  el objeto se desliza por el plano (no es el unico que lo determina) ")
     contenido_text.configure(text=contenido_text.cget("text") + "\n\nentre mayor sea el coeficiente de roce, seria mas dificil  para el objeto deslizarce ")
@@ -201,22 +219,22 @@ def abrir_ventana_ayuda_coeficiente_roce():
     
     contenido_text.pack()
 
-    #Imagen
-    imagen_path = "roce.jpg"  # Reemplaza con la ruta de tu imagen
+    imagen_path = "roce.jpg" 
     imagen = Image.open(imagen_path)
-    imagen = imagen.resize((800, 300))  # Ajusta el tamaño de la imagen según tus necesidades
+    imagen = imagen.resize((800, 300))
     imagen_tk = ImageTk.PhotoImage(imagen)
     imagen_label = tk.Label(ventana_ayuda, image=imagen_tk)
-    imagen_label.image = imagen_tk  # Mantén una referencia a la imagen para evitar que sea eliminada por el recolector de basura
+    imagen_label.image = imagen_tk
     imagen_label.pack()
 
-    # Ajustar tamaño de la ventana al contenido
     ventana_ayuda.update_idletasks()
     ventana_ayuda.geometry(f"{ventana_ayuda.winfo_width()*2}x{ventana_ayuda.winfo_height()*2}")
 
-
+#------------------------------------------------------------------------------------------------------------------------
+#funcion que crea un circulo
+#------------------------------------------------------------------------------------------------------------------------
 def create_round_button(master, command=None):
-    # Crear una imagen redonda con un signo de interrogación blanco en el centro
+    #Crear una imagen de un signo de pregunta el cual al precionarse despliega la imagen de ayuda al usuario
     size = 30
     background_color = "#4AC0CD"
     question_mark_color = "white"
@@ -229,47 +247,48 @@ def create_round_button(master, command=None):
     text_position = ((image.width - text_width) // 2, (image.height - text_height) // 2)
     draw.text(text_position, text, fill=question_mark_color, font=font)
 
-    # Crear una máscara redonda
     mask = Image.new("L", (size, size), 0)
     draw_mask = ImageDraw.Draw(mask)
     draw_mask.ellipse((0, 0, size, size), fill=255)
 
-    # Aplicar la máscara a la imagen
     image.putalpha(mask)
 
-    # Convertir la imagen de Pillow a un objeto PhotoImage de Tkinter
-    photo = ImageTk.PhotoImage(image)
+    photo = ImageTk.PhotoImage(image)    #transformar de Pillow a PhotoImage para usarse con Tkinter
 
-    # Crear el botón y asignar la imagen
     button = tk.Button(master, image=photo, relief="flat", bd=0, command=command)
     button.image = photo
 
     return button
-    
-# Crear la ventana principal
+#!------------------------------------------------------------------------------------------------------------------------!
+#aqui comienza la creacion de la ventana
+#!------------------------------------------------------------------------------------------------------------------------!
 window = tk.Tk()
 window.title("Cálculo de Aceleración")
 
-# Frame para los campos de entrada y botones
 input_frame = tk.Frame(window)
 input_frame.pack(side="top", pady=10)
 
-# Grupo para el ángulo
+#!------------------------------------------------------------------------------------------------------------------------!
+#cada grupo se encarga de la visualizacion de su respectivo parametro siendo que cada grupo comparte los comentarios 
+#!------------------------------------------------------------------------------------------------------------------------!
+
+#grupo encargado del angulo 
 angulo_group = tk.Frame(input_frame)
-angulo_label = tk.Label(angulo_group, text="Ángulo:")
-angulo_entry = tk.Entry(angulo_group)
+angulo_label = tk.Label(angulo_group, text="Ángulo:")#crea enl titulo del recuadro
+angulo_entry = tk.Entry(angulo_group)#campo de entrada 
+#esta linea se encarga de la posision del boton de ayuda y su funcion
 round_button1 = create_round_button(angulo_group, command=abrir_ventana_ayuda_angulo)
 angulo_group.pack(side="top"), angulo_label.pack(side="top"), angulo_entry.pack(side="top"), round_button1.pack(side="top")
 
 
-# Grupo para la masa
+#Grupo de la masa 
 masa_group = tk.Frame(input_frame)
 masa_label = tk.Label(masa_group, text="Masa:")
 masa_entry = tk.Entry(masa_group)
 round_button2 = create_round_button(masa_group, command=abrir_ventana_ayuda_masa)
 masa_group.pack(side="top"), masa_label.pack(side="top"), masa_entry.pack(side="top"), round_button2.pack(side="top")
 
-# Grupo para el coeficiente de roce
+#Grupo encargado de la visualizacion de la roce
 coeficiente_roce_group = tk.Frame(input_frame)
 coeficiente_roce_label = tk.Label(coeficiente_roce_group, text="Coeficiente de Roce:")
 coeficiente_roce_entry = tk.Entry(coeficiente_roce_group)
@@ -288,7 +307,7 @@ resultado_label.pack()
 canvas = tk.Canvas(window, width=600, height=450)
 canvas.pack()
 
-dibujar_triangulo(45)
+dibujar_triangulo(45)#dibuja un triangulo base 
 
 #Se utiliza un loop para crear el bucle principal de la interfaz gráfica.
 window.mainloop() 
