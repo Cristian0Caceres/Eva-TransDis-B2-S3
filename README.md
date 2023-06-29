@@ -62,5 +62,5 @@ debe ser un valor entre 0 y 1 además de ser expresado con “.” y no “,”
 ### video con codigo desarrollado
 https://youtu.be/6QcLAxmYwlI
 
-### link al camvas el cual tiene tanbien la informacion
+### link al camvas el cual tiene tambien la informacion
 https://www.canva.com/design/DAFl0nevCaY/lHC9m8W0IxzPHJXm6jh7eg/edit?utm_content=DAFl0nevCaY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
