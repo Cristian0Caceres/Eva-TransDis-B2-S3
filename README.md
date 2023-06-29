@@ -47,7 +47,10 @@ este es el lenguaje el cual se encuentra en su ultima version
 Tkinter es una de las herramientas para empezar en lo que es las interfazes graficas y lo utilisamos para la creacion de todo el ambito grafico del programa
 
 2-[math](https://docs.python.org/3/library/math.html)
-Este módulo proporciona acceso a las funciones matemáticas definidas por el estándar C y fueutilizado para el calculo de los angulos usando radianes
+Este módulo proporciona acceso a las funciones matemáticas definidas por el estándar C y fue utilizado para el calculo de los angulos usando radianes
+
+3-[Pillow](https://pypi.org/project/Pillow/)
+Esta libreria sirve para el procesamiento de imágenes y fue usado para dibujar el plano inclinado en la interfaz
 
 ### Guia de instalacion
 Para la instalación del programa descargar el archivo en el siguiente link: 
