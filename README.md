@@ -63,7 +63,7 @@ hacer cálculos en el programa deberá ingresar el valor de 1 de los ángulos, e
 debe ser un valor entre 0 y 1 además de ser expresado con “.” y no “,” 
 
 ### Video con codigo desarrollado
-https://youtu.be/6QcLAxmYwlI
+https://www.youtube.com/watch?v=yV_tEmkQ8fU
 
 ### Link al camvas el cual tiene tambien la informacion
 https://www.canva.com/design/DAFl0nevCaY/lHC9m8W0IxzPHJXm6jh7eg/edit?utm_content=DAFl0nevCaY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
