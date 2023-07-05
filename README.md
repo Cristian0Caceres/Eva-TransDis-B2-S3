@@ -65,5 +65,8 @@ debe ser un valor entre 0 y 1 además de ser expresado con “.” y no “,”
 ### Video con codigo desarrollado
 https://www.youtube.com/watch?v=yV_tEmkQ8fU
 
+## Video con Explicacion cientifica + Guia instalacion en video
+https://drive.google.com/file/d/1TeH69t6Ye2yXqNQjFWC8vLyTLFXir1oB/view?usp=sharing
+
 ### Link al camvas el cual tiene tambien la informacion
 https://www.canva.com/design/DAFl0nevCaY/lHC9m8W0IxzPHJXm6jh7eg/edit?utm_content=DAFl0nevCaY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
